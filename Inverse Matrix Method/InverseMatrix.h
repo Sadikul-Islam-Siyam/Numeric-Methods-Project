@@ -1,6 +1,11 @@
+#ifndef INVERSE_MATRIX_H
+#define INVERSE_MATRIX_H
+
 #include <iostream>
 #include <vector>
 #include <iomanip>
+#include <cmath>
+
 using namespace std;
 
 // determinant recursively
@@ -49,7 +54,7 @@ void adjRec(const vector<vector<double>> &a, vector<vector<double>> &adj) {
 bool invMat(const vector<vector<double>> &a, vector<vector<double>> &inv) {
     int n = a.size();
     double det = detRec(a, n);
-    if(det == 0) return false;
+    if(abs(det) < 1e-9) return false; // Check for near-zero determinant
 
     vector<vector<double>> adj(n, vector<double>(n));
     adjRec(a, adj);
@@ -74,43 +79,4 @@ vector<double> getSolution(const vector<vector<double>> &inv, const vector<doubl
     return x;
 }
 
-int main() {
-    int n;
-    cout << "Enter size of matrix A: ";
-    cin >> n;
-
-    vector<vector<double>> A(n, vector<double>(n));
-    cout << "Enter matrix A elements:\n";
-    for(int i = 0; i < n; i++)
-        for(int j = 0; j < n; j++)
-            cin >> A[i][j];
-
-    // read vector b for Ax=b
-    vector<double> b(n);
-    cout << "Enter vector b (RHS values):\n";
-    for(int i = 0; i < n; i++) cin >> b[i];
-
-    vector<vector<double>> inv;
-
-    if(invMat(A, inv)) {
-        cout << "\nInverse matrix:\n";
-        for(int i = 0; i < n; i++) {
-            for(int j = 0; j < n; j++)
-                cout << fixed << setprecision(5) << inv[i][j] << " ";
-            cout << "\n";
-        }
-
-        // Solve Ax = b
-        vector<double> x = getSolution(inv, b);
-
-        cout << "\nSolution vector x:\n";
-        for(double v : x)
-            cout << fixed << setprecision(5) << v << " ";
-        cout << "\n";
-
-    } else {
-        cout << "Matrix is singular and cannot be inverted.\n";
-    }
-
-    return 0;
-}
+#endif
