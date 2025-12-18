@@ -1,0 +1,6 @@
+=== Runge Kutta Method ===
+Initial Condition (x0, y0): (0.000000, 1.000000)
+Target x: 2.000000
+Step size h: 0.200000
+
+Result y(2.000000) = 1.103639

@@ -67,7 +67,7 @@ private:
         u = (y - x[0]) / h;
         
         fores = 0.0;
-        for(int i = 0; i < n; i++) {
+        for(int i = 0; i < n; i++){
             fores += dif[0][i] * recur(i, u);
         }
         forward_calculated = true;
@@ -79,7 +79,7 @@ private:
         u = (y - x[n - 1]) / h;
     
         backres = 0.0;
-        for(int i = 0; i < n; i++) {
+        for(int i = 0; i < n; i++){
             backres += bif[n - 1][i] * becur(i, u);
         }
         backward_calculated = true;
@@ -242,50 +242,50 @@ public:
 };
 
 // File Operation 
-class FileIO {
+class FileIO{
 private:
     ifstream in;
     ofstream out;
 
 public:
-    FileIO() {}
+    FileIO(){}
 
-    bool openInput(const string &filename = "../Input/input.txt") {
+    bool openInput(const string &filename = "../Input/input.txt"){
         in.open(filename);
-        if (!in.is_open()) {
+        if(!in.is_open()){
             cerr << "Cannot open input file\n";
             return false;
         }
         return true;
     }
 
-    bool openOutput(const string &filename = "../Output/output.txt") {
+    bool openOutput(const string &filename = "../Output/output.txt"){
         out.open(filename);
-        if (!out.is_open()) {
+        if(!out.is_open()){
             cerr << "Cannot open output file\n";
             return false;
         }
         return true;
     }
     template<typename T>
-    void print(const T &val) {
+    void print(const T &val){
         cout << val;
         out  << val;
         out.flush();
     }
     template<typename T>
-    void printToFile(const T &val) {
+    void printToFile(const T &val){
         out << val;
         out.flush();
     }
-    ifstream& input() {
+    ifstream& input(){
         return in;
     }
-    void closeFiles() {
-        if (in.is_open())  in.close();
-        if (out.is_open()) out.close();
+    void closeFiles(){
+        if(in.is_open())  in.close();
+        if(out.is_open()) out.close();
     }
-    ~FileIO() {
+    ~FileIO(){
         closeFiles();
     }
 };
