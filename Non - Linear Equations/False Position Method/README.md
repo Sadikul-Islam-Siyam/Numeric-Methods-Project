@@ -43,52 +43,6 @@ Where:
 - Uses linear interpolation to get better approximation
 - Stops when the interval size is less than the error tolerance
 
-### Advantages:
-- Faster convergence than Bisection Method
-- More accurate root approximation at each iteration
-- Does not require derivative calculation
-- Guaranteed to find a root if one exists in the interval
-- Better approximation using function values
-
-### Disadvantages:
-- Can be slower than other methods in some cases
-- May converge slowly if one endpoint remains fixed
-- Requires two initial guesses with opposite signs
-- One end of the interval may remain stationary for many iterations
-
----
-
-## Implementation Details
-### How the Code Works:
-
-1. **Input Reading**: Reads 4 coefficients (an1, an2, an3, an4), error tolerance (e), and step size (h) from input file
-2. **Range Detection**: Automatically finds all intervals where f(a)×f(b) < 0 within [-xmax, xmax]
-3. **Root Finding**: Applies False Position method to each detected interval:
-   - Calculates intersection point: c = b - f(b)×(b-a)/(f(b)-f(a))
-   - Checks which half contains the root based on sign change
-   - Repeats until |b - a|/2 < e
-4. **Output Generation**: Writes equation, ranges, roots, and iteration counts to output file
-
-### Code Limitations:
-
-- **Fixed Polynomial Type**: Only works for 4th degree polynomials of the form: an1×x⁴ + an2×x³ + an3×x² + an4×x
-- **No Constant Term**: Missing the constant term (an5), can only find roots that pass through origin
-- **Fixed Step Size**: Uses constant step size (h) for range detection, may miss roots in narrow intervals
-- **Stagnant Endpoint**: One endpoint may remain fixed for many iterations causing slow convergence
-- **Division by Zero**: No check for f(b) = f(a) which causes division by zero
-- **Division by Zero in xmax()**: No check for an1 = 0
-- **Limited Precision**: Uses long double which may have precision issues
-
-### Code Constraints:
-
-- **Input Format**: Must provide exactly 6 values: an1, an2, an3, an4, e, h
-- **Coefficient Constraint**: an1 ≠ 0 (required for xmax calculation)
-- **Error Tolerance**: e > 0 (positive value required)
-- **Step Size**: h > 0 and h < |xmax|
-- **Function Values**: f(b) ≠ f(a) to avoid division by zero
-- **File Dependency**: Requires input.txt in ../Input/ directory
-- **Range Limitation**: Only searches within [-xmax, xmax] interval
-
 ---
 
 ## Input/Output Example
@@ -133,3 +87,13 @@ Number of iterations: 16
 - First root required 36 iterations (more than Bisection due to fixed endpoint)
 - Second root required 16 iterations
 - Both roots achieved exact values within tolerance
+---
+## Code Constraints:
+
+- **Input Format**: Must provide exactly 6 values: an1, an2, an3, an4, e, h
+- **Coefficient Constraint**: an1 ≠ 0 (required for xmax calculation)
+- **Error Tolerance**: e > 0 (positive value required)
+- **Step Size**: h > 0 and h < |xmax|
+- **Function Values**: f(b) ≠ f(a) to avoid division by zero
+- **File Dependency**: Requires input.txt in ../Input/ directory
+- **Range Limitation**: Only searches within [-xmax, xmax] interval

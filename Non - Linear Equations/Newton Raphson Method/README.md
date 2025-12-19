@@ -52,52 +52,6 @@ Where:
 - Very fast convergence rate when conditions are met
 - Stops when the difference between successive iterations is less than error tolerance
 
-### Advantages:
-- Fastest convergence among simple root-finding methods
-- Requires only one initial guess
-- Very efficient when initial guess is close to the root
-- Quadratic convergence rate near the root
-
-### Disadvantages:
-- Requires derivative of the function (f'(x))
-- May not converge if initial guess is far from root
-- Fails if derivative is zero or very small
-- Can diverge if conditions are not met
-- Needs good initial approximation for guaranteed convergence
-
----
-
-## Implementation Details
-### How the Code Works:
-
-1. **Input Reading**: Reads initial guess (x0), step tolerance (step), function value tolerance (tol), and maximum iterations (maxIter)
-2. **Iteration Loop**: For each iteration (up to maxIter):
-   - Calculates f(xn) and f'(xn)
-   - Checks if f'(xn) = 0 (error condition)
-   - Computes next approximation: xn+1 = xn - f(xn)/f'(xn)
-   - Calculates convergence criteria: |xn+1 - xn| and |f(xn+1)|
-3. **Convergence Check**: Stops if |xn+1 - xn| < step OR |f(xn+1)| < tol
-4. **Output Generation**: Writes equation, parameters, root, and iteration count to output file
-
-### Code Limitations:
-
-- **Fixed Function**: Hardcoded for f(x) = e^(-x)×cos(x) only, cannot solve other equations
-- **Fixed Derivative**: Derivative is manually coded, requires code modification for different functions
-- **No Divergence Detection**: Does not detect if the method is diverging
-- **Zero Derivative Handling**: Stops immediately if f'(x) = 0, no recovery mechanism
-- **Single Root**: Finds only one root even if multiple roots exist
-- **No Interval Check**: Does not verify if initial guess is in a valid region
-
-### Code Constraints:
-
-- **Input Format**: Must provide exactly 4 values: x0, step, tol, maxIter
-- **Initial Guess**: x0 should be close to the actual root for convergence
-- **Tolerances**: step > 0 and tol > 0 (positive values required)
-- **Maximum Iterations**: maxIter > 0 (typically 100 or more)
-- **Derivative Constraint**: f'(x) ≠ 0 in the neighborhood of the root
-- **Function Continuity**: Function must be continuous and differentiable near the root
-- **File Dependency**: Requires input.txt in ../Input/ directory
-
 ---
 
 ## Input/Output Example
@@ -141,3 +95,16 @@ Number of iterations: 3
 - Root found: x ≈ 1.570789 (approximately π/2)
 - Converged in only 3 iterations (very fast!)
 - Newton-Raphson's quadratic convergence demonstrated
+
+---
+
+
+## Code Constraints:
+
+- **Input Format**: Must provide exactly 4 values: x0, step, tol, maxIter
+- **Initial Guess**: x0 should be close to the actual root for convergence
+- **Tolerances**: step > 0 and tol > 0 (positive values required)
+- **Maximum Iterations**: maxIter > 0 (typically 100 or more)
+- **Derivative Constraint**: f'(x) ≠ 0 in the neighborhood of the root
+- **Function Continuity**: Function must be continuous and differentiable near the root
+- **File Dependency**: Requires input.txt in ../Input/ directory

@@ -42,49 +42,6 @@ Where:
 - Convergence is guaranteed but relatively slow (linear)
 - Stops when the interval size is less than the error tolerance
 
-### Advantages:
-- Simple and reliable method
-- Always converges if initial conditions are met
-- Guaranteed to find a root if one exists in the interval
-
-### Disadvantages:
-- Slow convergence rate compared to other methods
-- Requires two initial guesses with opposite signs
-- Cannot find multiple roots in the same interval
-- Not efficient for functions with multiple roots
-
----
-
-## Implementation Details
-
-### How the Code Works:
-
-1. **Input Reading**: Reads 4 coefficients (an1, an2, an3, an4), error tolerance (e), and step size (h) from input file
-2. **Range Detection**: Automatically finds all intervals where f(a)×f(b) < 0 within [-xmax, xmax]
-3. **Root Finding**: Applies bisection method to each detected interval:
-   - Calculates midpoint c = (a + b) / 2
-   - Checks which half contains the root based on sign change
-   - Repeats until |b - a|/2 < e
-4. **Output Generation**: Writes equation, ranges, roots, and iteration counts to output file
-
-### Code Limitations:
-
-- **Fixed Polynomial Type**: Only works for 4th degree polynomials of the form: an1×x⁴ + an2×x³ + an3×x² + an4×x
-- **No Constant Term**: Missing the constant term (an5), can only find roots that pass through origin
-- **Fixed Step Size**: Uses constant step size (h) for range detection, may miss roots in narrow intervals
-- **No Multiple Roots**: Cannot detect multiple roots in the same interval
-- **Division by Zero**: No check for an1 = 0 in xmax() function
-- **Limited Precision**: Uses long double which may have precision issues for very small tolerances
-
-### Code Constraints:
-
-- **Input Format**: Must provide exactly 6 values: an1, an2, an3, an4, e, h
-- **Coefficient Constraint**: an1 ≠ 0 (required for xmax calculation)
-- **Error Tolerance**: e > 0 (positive value required)
-- **Step Size**: h > 0 and h < |xmax| (should be small enough to detect all sign changes)
-- **File Dependency**: Requires input.txt in ../Input/ directory
-- **Range Limitation**: Only searches within [-xmax, xmax] interval
-
 ---
 
 ## Input/Output Example
@@ -127,4 +84,14 @@ Number of iterations: 12
 **Explanation:**
 - Found 2 roots: x ≈ -1.0 and x ≈ 0.0
 - Each root required 12 iterations to converge
-- Both roots satisfied the error tolerance condition
+
+---
+## Code Constraints:
+
+- **Input Format** : Must provide exactly 6 values: an1, an2, an3, an4, e, h
+- **Coefficient Constraint**: *an1 ≠ 0* (required for xmax calculation)
+- **Error Tolerance**: *e > 0* (positive value required)
+- **Step Size**: *h > 0 and h < |xmax|* (should be small enough to detect all sign changes)
+- **File Dependency**: Requires input.txt in *../Input/* directory
+- **Range Limitation**: Only searches within *[-xmax, xmax]* interval
+

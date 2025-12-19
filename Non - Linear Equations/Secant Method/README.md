@@ -44,58 +44,8 @@ Where:
 - Convergence rate is approximately 1.618 (golden ratio)
 - Slightly slower than Newton-Raphson but faster than Bisection and False Position
 - Stops when the difference between successive iterations is less than error tolerance
-
-### Advantages:
-- Does not require derivative calculation
-- Faster convergence than Bisection and False Position methods
-- Only requires function evaluations
-- Useful when derivatives are difficult to calculate
-- More practical than Newton-Raphson for complex functions
-
-### Disadvantages:
-- Requires two initial guesses
-- May diverge if initial guesses are not close to root
-- Convergence is not guaranteed for all functions
-- Slower than Newton-Raphson method
-- Can fail if f(xₙ) = f(xₙ₋₁) (division by zero)
-- More function evaluations per iteration than Newton-Raphson
-
 ---
 
-## Implementation Details
-### How the Code Works:
-
-1. **Input Reading**: Reads two initial guesses (x1, x2), error tolerance (E), and maximum iterations (maxIter)
-2. **Initial Check**: Verifies f(x1) × f(x2) < 0 (opposite signs required)
-3. **Iteration Loop**: Repeats until convergence:
-   - Calculates next approximation: x0 = (x1×f(x2) - x2×f(x1))/(f(x2) - f(x1))
-   - Checks if f(x0) = 0 (exact root found)
-   - Updates values: x1 = x2, x2 = x0
-   - Calculates next xm for convergence check
-4. **Convergence Check**: Stops when |xm - x0| < E or maximum iterations reached
-5. **Output Generation**: Writes equation, parameters, iteration details, root, and iteration count to output file
-
-### Code Limitations:
-
-- **Fixed Function**: Hardcoded for f(x) = x³ + x - 1 only, cannot solve other equations
-- **No Derivative Needed**: Advantage over Newton-Raphson, but still limited to one function
-- **Division by Zero**: No explicit check for f(x2) = f(x1) before division
-- **Sign Check Only**: Initial validation only checks opposite signs, not proximity to root
-- **Single Root**: Finds only one root, stops after first convergence
-- **No Divergence Detection**: Does not detect if iterations are diverging
-
-### Code Constraints:
-
-- **Input Format**: Must provide exactly 4 values: x1, x2, E, maxIter
-- **Sign Constraint**: f(x1) × f(x2) < 0 (opposite signs required for convergence)
-- **Error Tolerance**: E > 0 (positive value required)
-- **Maximum Iterations**: maxIter > 0 (typically 100 or more)
-- **Function Values**: f(x2) ≠ f(x1) to avoid division by zero
-- **Initial Guesses**: x1 ≠ x2 (different values required)
-- **File Dependency**: Requires input.txt in ../Input/ directory
-- **Convergence Region**: Initial guesses should be reasonably close to the actual root
-
----
 
 ## Input/Output Example
 
@@ -143,3 +93,15 @@ Number of iterations: 5
 - Converged in 5 iterations
 - Shows rapid convergence without needing derivatives
 - Each iteration shows the progression of x₀ values
+---
+## Code Constraints:
+
+- **Input Format**: Must provide exactly 4 values: x1, x2, E, maxIter
+- **Sign Constraint**: f(x1) × f(x2) < 0 (opposite signs required for convergence)
+- **Error Tolerance**: E > 0 (positive value required)
+- **Maximum Iterations**: maxIter > 0 (typically 100 or more)
+- **Function Values**: f(x2) ≠ f(x1) to avoid division by zero
+- **Initial Guesses**: x1 ≠ x2 (different values required)
+- **File Dependency**: Requires input.txt in ../Input/ directory
+- **Convergence Region**: Initial guesses should be  close to the actual root
+
