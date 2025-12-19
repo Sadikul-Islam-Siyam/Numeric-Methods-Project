@@ -1,9 +1,15 @@
+The equation is: f(x) = (1)x^4 + (-3)x^3 + (2)x^2 + (6)x
 
-=== Backward Difference Table ===
-1.00 
-8.00 7.00 
-27.00 19.00 12.00 
-64.00 37.00 18.00 6.00 
+Error tolerance: 0.0001
 
-=== Newton Backward Result ===
-f(3.8) = 54.872000
+Range found: [-1.23607 , -0.736068]
+Range found: [-0.236068 , 0.263932]
+
+Finding Root 1:
+Root 1: -1.000106
+Number of iterations: 12
+
+Finding Root 2:
+Root 2: -0.000106
+Number of iterations: 12
+
